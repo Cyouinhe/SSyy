@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public InputControl inputControl;
 
+    private PhysicsCheck physicsCheck;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         inputControl = new InputControl();
+        physicsCheck = GetComponent<PhysicsCheck>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext obj)
     {
-        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        if(physicsCheck.isGround)
+            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     }
 }

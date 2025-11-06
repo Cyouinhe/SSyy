@@ -12,12 +12,21 @@ public class PhysicsCheck : MonoBehaviour
     [Header("״̬")]
     public bool isGround;
 
+    private void Update()
+    {
+        Check();
+    }
+
     public void Check()
     {
         isGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, checkRadius, groundLayer);
     }
 
-    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, checkRadius);
+    }
+
 
 
 }
